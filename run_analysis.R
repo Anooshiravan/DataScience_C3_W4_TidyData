@@ -73,20 +73,3 @@ dataTable$featAxis <- factor(x %*% y, labels=c(NA, "X", "Y", "Z"))
 setkey(dataTable, subject, activity, featDomain, featAcceleration, featInstrument, featJerk, featMagnitude, featVariable, featAxis)
 tidyData <- dataTable[, list(count = .N, average = mean(value)), by=key(dataTable)]
 write.table(tidyData, "tidyData.txt")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
