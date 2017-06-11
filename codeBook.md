@@ -3,7 +3,7 @@ Codebook
 
 Variable list
 -------------
-
+```
 subject
 activity
 featDomain
@@ -14,7 +14,7 @@ featMagnitude
 featAxis
 featCount
 featAverage
-
+```
 
 List the key variables in the data table
 ----------------------------------------
