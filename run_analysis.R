@@ -42,12 +42,40 @@ dataTableActivityNames <- fread(file.path(dataFilesPath, "activity_labels.txt"))
 setnames(dataTableActivityNames, names(dataTableActivityNames), c("activityNum", "activityName"))
 
 # 4. Appropriately labels the data set with descriptive variable names.
-dataTable           <- merge(dataTable, dataTableActivityNames , by="activityNum", all.x=TRUE)
+dataTable        <- merge(dataTable, dataTableActivityNames , by="activityNum", all.x=TRUE)
 setkey(dataTable, subject, activityNum, activityName)
-dataTable           <- data.table(melt(dataTable, key(dataTable), variable.name="featureCode"))
+dataTable        <- data.table(melt(dataTable, key(dataTable), variable.name="featureCode"))
+dataTable           <- merge(dataTable, dataTableFeatures[, list(featureNum, featureCode, featureName)], by="featureCode", all.x=TRUE)
+dataTable$activity  <- factor(dataTable$activityName)
+dataTable$feature   <- factor(dataTable$featureName)
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
-tidyData            <- merge(dataTable, dataTableFeatures[, list(featureNum, featureCode, featureName)], by="featureCode", all.x=TRUE)
+grepFeature <- function (regex) {
+  grepl(regex, dataTable$feature)
+}
+n <- 2
+y <- matrix(seq(1, n), nrow=n)
+x <- matrix(c(grepFeature("^t"), grepFeature("^f")), ncol=nrow(y))
+dataTable$featDomain <- factor(x %*% y, labels=c("Time", "Freq"))
+x <- matrix(c(grepFeature("Acc"), grepFeature("Gyro")), ncol=nrow(y))
+dataTable$featInstrument <- factor(x %*% y, labels=c("Accelerometer", "Gyroscope"))
+x <- matrix(c(grepFeature("BodyAcc"), grepFeature("GravityAcc")), ncol=nrow(y))
+dataTable$featAcceleration <- factor(x %*% y, labels=c(NA, "Body", "Gravity"))
+
+x <- matrix(c(grepFeature("mean()"), grepFeature("std()")), ncol=nrow(y))
+dataTable$featVariable <- factor(x %*% y, labels=c("Mean", "SD"))
+dataTable$featJerk <- factor(grepFeature("Jerk"), labels=c(NA, "Jerk"))
+dataTable$featMagnitude <- factor(grepFeature("Mag"), labels=c(NA, "Magnitude"))
+n <- 3
+y <- matrix(seq(1, n), nrow=n)
+x <- matrix(c(grepFeature("-X"), grepFeature("-Y"), grepFeature("-Z")), ncol=nrow(y))
+dataTable$featAxis <- factor(x %*% y, labels=c(NA, "X", "Y", "Z"))
+setkey(dataTable, subject, activity, featDomain, featAcceleration, featInstrument, featJerk, featMagnitude, featVariable, featAxis)
+tidyData <- dataTable[, list(count = .N, average = mean(value)), by=key(dataTable)]
+write.table(tidyData, "tidyData.txt")
+
+
+
 
 
 
