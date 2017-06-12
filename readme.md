@@ -1,4 +1,4 @@
-# Getting and Cleaning Data, Peer Assessment Project
+# Getting and Cleaning Data, Course 3 Week 4
 
 ## <u>How to regenerate tidy data:</u>
 1. Clone the project, the data files are in UCI HAR Dataset folder
