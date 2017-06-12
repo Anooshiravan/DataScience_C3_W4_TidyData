@@ -7,12 +7,15 @@
 
 
 ## <u>Steps performed in R</u>
-#### 1. Merge the training and the test sets to create one data set.
+
+#### 0. Preparation: load packages and define path
 ```r
 packages <- c("data.table", "reshape2")
 sapply(packages, require, character.only=TRUE, quietly=TRUE)
 path <- getwd()
-
+```
+#### 1. Merge the training and the test sets to create one data set.
+```r
 dataFilesPath       <- file.path(path, "UCI HAR Dataset")
 dataTrainSubject    <- fread(file.path(dataFilesPath, "train", "subject_train.txt"))
 dataTrainActivity   <- fread(file.path(dataFilesPath, "train", "Y_train.txt"))
