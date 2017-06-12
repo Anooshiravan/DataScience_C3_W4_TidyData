@@ -1,4 +1,6 @@
 # Getting and Cleaning Data, Course 3 Week 4
+The purpose of this project is to demonstrate ability to collect, work with, and clean a data set.  
+The goal is to prepare tidy data that can be used for later analysis.
 
 ## <u>How to regenerate tidy data:</u>
 1. Clone the project, the data files are in UCI HAR Dataset folder
