@@ -1,14 +1,12 @@
 # Getting and Cleaning Data, Peer Assessment Project
 
-## <u>How To</u>
-To repeat the work done in this project:
-
-#### 1. Clone the project, the data files are in UCI HAR Dataset folder
-#### 2. Execute the script run_analysis.R from the root directory
-#### 3. Examine tidyData.txt as the result of run_analysis.R in the root directory
+## <u>How to regenerate tidy data:</u>
+1. Clone the project, the data files are in UCI HAR Dataset folder
+2. Execute the script run_analysis.R from the root directory
+3. Examine tidyData.txt as the result of run_analysis.R in the root directory
 
 
-## <u>Steps</u>
+## <u>Steps performed in R</u>
 #### 1. Merge the training and the test sets to create one data set.
 ```r
 packages <- c("data.table", "reshape2")
