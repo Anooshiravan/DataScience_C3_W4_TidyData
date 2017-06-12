@@ -3,9 +3,9 @@
 ## <u>How To</u>
 To repeat the work done in this project:
 
-* 1. Clone the project, the data files are in UCI HAR Dataset folder
-* 2. Execute the script run_analysis.R from the root directory
-* 3. Examine tidyData.txt as the result of run_analysis.R in the root directory
+#### 1. Clone the project, the data files are in UCI HAR Dataset folder
+#### 2. Execute the script run_analysis.R from the root directory
+#### 3. Examine tidyData.txt as the result of run_analysis.R in the root directory
 
 
 ## <u>Steps</u>
